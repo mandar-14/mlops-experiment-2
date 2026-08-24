@@ -3,11 +3,20 @@ import pandas as pd
 
 os.makedirs("data", exist_ok=True)
 
-df = pd.DataFrame({
-    "Name": ["Maddy", "John"],
-    "Marks": [85, 90]
+file_path = "data/students.csv"
+
+# Read existing data
+df = pd.read_csv(file_path)
+
+# Append a new row
+new_row = pd.DataFrame({
+    "Name": ["Rahul"],
+    "Marks": [95]
 })
 
-df.to_csv("data/students.csv", index=False)
+df = pd.concat([df, new_row], ignore_index=True)
 
-print("CSV file created successfully!")
+# Save updated data
+df.to_csv(file_path, index=False)
+
+print("New row appended successfully!")
